@@ -47,11 +47,11 @@ In the bottom of the screen, we can see the stack trace of the goroutine, and al
 
 ![trace syscall details](trace-trace-details-syscall.png)
 
-You can also get a scoped view by selecting the `Goroutine analysis` link on the main page. It will list the different "types" of goroutines, along with their respective number of occurence:
+You can also get a scoped view by selecting the `Goroutine analysis` link on the main page. It will list the different "types" of goroutines, along with their respective number of occurrence:
 
 ![trace goroutines](trace-goroutines.png)
 
-Click on one with multiple occurences, and you can see a list of these occurences:
+Click on one with multiple occurrences, and you can see a list of these occurrences:
 
 ![trace goroutine list](trace-goroutine-list.png)
 
@@ -81,3 +81,7 @@ So the execution trace tool is a great tool to understand when a goroutine start
 
 - <https://about.sourcegraph.com/go/an-introduction-to-go-tool-trace-rhys-hiltner/>
 - <https://golang.org/doc/diagnostics.html>
+
+## Next
+
+You can now get back to the [homepage](../README.md), to start playing with these tools yourself!

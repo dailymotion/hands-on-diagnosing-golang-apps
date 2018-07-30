@@ -103,11 +103,11 @@ and then request a goroutine profile:
 $ pprof -http=:9000 http://localhost:6060/debug/pprof/goroutine
 ```
 
-It will automatically open your default browser and point it to <http://localhost:9000/ui/>. The default view is the **Graph** view, but I think that the **Flame Graph** view is easier to understand. You can switch view by using the `View` dropdown on the top left of the UI, and select `Flame Graph` - or go to <http://localhost:9000/ui/flamegraph> directly:
+It will automatically open your default browser and point it to <http://localhost:9000/ui/>. The default view is the **Graph** view, but I think that the **Flame Graph** view is easier to understand. You can select a different view by using the `View` dropdown on the top left of the UI, and select `Flame Graph` - or go to <http://localhost:9000/ui/flamegraph> directly:
 
 ![pprof goroutine Flame Graph View](pprof-goroutine-flame-graph.png)
 
-In this view, we can see the "inversed stack trace" of the goroutines. We can see on the left the goroutines used to server the HTTP requests:
+In this view, we can see the "inversed stack trace" of the goroutines. We can see on the left the goroutines used to serve the HTTP requests:
 - the left-most one serving the pprof request (used to generate the profile we are looking at)
 - and next to it, another goroutine serving the `helloWorldHandler`, and which seems stuck on a mutex lock.
 

@@ -1,6 +1,6 @@
 # Signals
 
-A standard way of interacting with a running process is to send signals to it. The classic one that everybody knows is the `KILL` signal, that force kill a process.
+A standard way of interacting with a running process is to send "signals" to it. The classic one that everybody knows is the `KILL` signal, that force-kill a process.
 
 You can send a signal using the `kill` command. You can pass it the signal to send with the `-s` option:
 
@@ -12,7 +12,7 @@ will send the default `TERM` (or `SIGTERM`) signal to the process with PID `123`
 
 ## SIGABRT signal
 
-Here, we can touch the first thing that is specific to go applications: by default, the go runtime handles the `SIGABRT` (or `ABRT`) signal by printing the stack trace to stderr and killing the process.
+Here, we touch the first thing that is specific to go applications: by default, the go runtime handles the `SIGABRT` (or `ABRT`) signal by printing the stack trace to stderr and killing the process.
 
 So if you ever find yourself in front of a "stucked" go application that doesn't answer anymore, instead of "just" killing it, you should at least send it the `SIGABRT` signal so that it prints its stack trace. That might help the developers to investigate the issue.
 
@@ -21,7 +21,7 @@ You can control the behaviour of the special `SIGABRT` signal by setting the `GO
 - `single` (the default): print the stack trace for the current goroutine, or all goroutines if there are no current goroutine (or if the failure is internal to the runtime), and then exit
 - `all`: print the stack trace for all user-created goroutines, and then exit
 - `system`: print the stack trace for all user-created + system goroutines (including the frames for runtime functions), and then exit
-- `crash`: print the stack trace for all user-created + system goroutines (including the frames for runtime functions), and then "crash" - which, on Unix system, will trigger a core dump
+- `crash`: print the stack trace for all user-created + system goroutines (including the frames for runtime functions), and then "crash" - which, on Unix system, will trigger a core dump (more on that later)
 
 So if you set `GOTRACEBACK=crash` before starting the application, it will produce a core dump when receiving the `SIGABRT` signal.
 

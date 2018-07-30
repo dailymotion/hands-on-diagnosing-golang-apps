@@ -153,6 +153,42 @@ created by github.com/dailymotion-leo/Console-API/vendor/github.com/cihub/seelog
 	/Users/v.behar/go/src/github.com/dailymotion-leo/Console-API/vendor/github.com/cihub/seelog/behavior_asynclooplogger.go:40 +0x9d
 ```
 
+### Heap metrics
+
+If you hit `/debug/pprof/heap?debug=1`, you will get something like:
+
+```
+# runtime.MemStats
+# Alloc = 644736
+# TotalAlloc = 120881144
+# Sys = 37312760
+# Lookups = 27
+# Mallocs = 6298
+# Frees = 1002
+# HeapAlloc = 644736
+# HeapSys = 32571392
+# HeapIdle = 31203328
+# HeapInuse = 1368064
+# HeapReleased = 0
+# HeapObjects = 5296
+# Stack = 655360 / 655360
+# MSpan = 23408 / 32768
+# MCache = 13888 / 16384
+# BuckHashSys = 1443434
+# GCSys = 1249280
+# OtherSys = 1344142
+# NextGC = 4194304
+# LastGC = 1532956502617601976
+# PauseNs = [93271 82884 35650 36818 64586 57329 52963 50373 66872 45559 37202 50945 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# PauseEnd = [1532956489350639540 1532956490043335843 1532956490043732241 1532956493803928418 1532956494538104722 1532956494538490954 1532956496833891545 1532956497516511860 1532956497516935859 1532956501865578340 1532956502617221778 1532956502617601976 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+# NumGC = 12
+# NumForcedGC = 4
+# GCCPUFraction = -6.976559212077492e-10
+# DebugGC = false
+```
+
+Which is the same data reported by the `expvar` handler, but in a different - more human-friendly - format. You should have a look at the [Go runtime documentation](https://golang.org/pkg/runtime/) to understand the meaning of each metric - `HeapAlloc`, `HeapIdle`, `HeapInuse`, ...
+
 ### Collecting a Heap profile
 
 Collecting a heap profile allows to understand what is holding on heap memory. It's just a matter of hitting `/debug/pprof/heap`, and retrieve the binary profile file returned in response. We'll see in the next section how to [analyze a profile](../pprof-profiles/README.md).

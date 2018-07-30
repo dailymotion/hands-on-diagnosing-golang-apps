@@ -10,7 +10,7 @@ There are some really useful unix tools, that are most of the time the first one
 
 The `ps` command - which stands for `Process Status` - displays the currently-running processes. Everybody knows `ps`... or a least knows a little about it, because it's a complex tool, with different behaviour on different OS.
 
-If we run the `ps` command with the "classic" `aux` options, we should see the list of all processes running:
+If we run the `ps` command with the "classic" `aux` options, we should see the list of all running processes:
 
 ```
 $ ps aux
@@ -26,7 +26,7 @@ root        10  0.0  0.0      0     0 ?        S    Apr05   0:28 [watchdog/0]
 ...
 ```
 
-If you want to know how a process is behaving, the most interesting columns are the `%CPU` and `%MEM`, but it's relative information. If you want to know how much memory a process is using, you should really look at the `RSS` column, which is the `Resident Set Size` - basically, it represents the amount of memory that is really in RAM, and had not been swaped out (or pages out).
+If you want to know how a process is behaving, the most interesting columns are the `%CPU` and `%MEM` - but this is "relative" information, expressed in percentage. If you want to know how much memory a process is using (in bytes), you should really look at the `RSS` column, which is the `Resident Set Size` - basically, it represents the amount of memory that is really in RAM, and had not been swaped-out (or paged-out).
 
 If you want to get that information for a specific process, you can use the `ps l PID` command. The `l` option has the advantage of displaying roughly the same informations on different systems:
 
@@ -155,7 +155,7 @@ You can also see on which ports the application is listening: in our example, on
 
 ## Proc files on Linux
 
-On Linux, you can learn a great deal of information about a process, from looking at the virtual `/proc` filesystem. If you know the PID of the process, you list the files under `/proc/PID`:
+On Linux, you can learn a great deal of information about a process, from looking at the virtual `/proc` filesystem. If you know the PID of the process, you can list the files under `/proc/PID`:
 
 ```
 $ ls -lh /proc/23929

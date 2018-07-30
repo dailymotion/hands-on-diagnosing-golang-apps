@@ -59,7 +59,7 @@ That's much more interesting! If we click on the goroutine 50 in our example (`G
 
 ![trace events](trace-events.png)
 
-Most of the time is taken by the `G50` goroutine, but that's already what we can see from the graph on top. The interesting part here is the number of `syscall` occurences: **29**. Let's click on the `syscall` link, and then select the `self time` radio input, to see the list of syscalls:
+Most of the time is taken by the `G50` goroutine, but that's already what we can see from the graph on top. The interesting part here is the number of `syscall` occurrences: **29**. Let's click on the `syscall` link, and then select the `self time` radio input, to see the list of syscalls:
 
 ![trace syscalls](trace-syscalls.png)
 

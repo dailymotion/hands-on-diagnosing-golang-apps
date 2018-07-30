@@ -116,3 +116,21 @@ created by main.startGoroutines
 Bingo! We can see that we have a few goroutines that look similar, and that are all waiting on a channel (`chan receive`), which means they are waiting for something to happen.
 
 Let's count how many goroutines we have, do a new HTTP request, and count again. After the request we have 5 more goroutines... So this seems like a goroutines leak.
+
+We can also collect and analyze a goroutine profile:
+
+```
+$ pprof -http=:9000 http://localhost:6060/debug/pprof/goroutine
+```
+
+And then open the `Flame Graph` view:
+
+![pprof goroutines flame graph view](pprof-goroutines-flame-graph.png)
+
+We can see the `startGoroutines` function, which is linked to 10 goroutines.
+
+And if we open the `Source` view:
+
+![pprof goroutines source view](pprof-goroutines-source.png)
+
+We can see that our `startGoroutines` function is starting multiple goroutines, but never stopping them.

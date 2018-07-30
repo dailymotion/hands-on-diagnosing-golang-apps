@@ -20,7 +20,7 @@ Running this command will automatically open your default browser and point it t
 
 ![heap Graph View](heap-graph.png)
 
-This is the default "graph" view of a heap profile. By default, heap profiles are based on the "inuse space", by you can display heap profiles based on different metrics, by using the `-sample_index` flag option with one of the following values:
+This is the default "graph" view of a heap profile. By default, heap profiles are based on the "inuse space", but you can display heap profiles based on different metrics, by using the `-sample_index` flag option with one of the following values:
 
 - `inuse_space` (the default): displays in-use memory size
 - `inuse_objects`: displays in-use object counts
@@ -47,6 +47,8 @@ But the graph view is not the only one - pprof has support for multiple views, t
 The `Flame Graph` view is very good to have a good overview:
 
 ![heap Flame Graph View](heap-flame-graph.png)
+
+It shows the "inversed stack trace", with each frame (element) width representing the relative memory size used/allocated from it. So the wider the element, the more memory it is using (or had allocated, depending on the selected metrics). And you can click on any element to "zoom in" that part of the stack.
 
 So far we analyzed a heap profile, but it work the same way for CPU profiles and goroutine profiles.
 
@@ -76,4 +78,4 @@ and `pprof` will save the profile file in a directory defined by the `PPROF_TMPD
 
 ## Next
 
-You can now head over to the next section, on [analyzing execution traces](traces/README.md).
+You can now head over to the next section, on [analyzing execution traces](../traces/README.md).

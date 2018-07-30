@@ -41,7 +41,7 @@ After 10 seconds, pprof will automatically open your default browser and point i
 
 Once again, we can clearly see that most of the CPU time is spent in `doSomeBusinessLogic` function, and more specifically in the `leakMemory` function. Let's try not to be influenced by the function name, and see behind it: lots of io-related operations, and a bytes buffer that is growing.
 
-So, it's memory-related. Let's see if a memory heap profile can help us dig dipper. We'll take a heap profile with
+So, it's memory-related. Let's see if a memory heap profile can help us dig deeper. We'll take a heap profile with
 
 ```
 $ pprof -http=:9001 http://localhost:6060/debug/pprof/heap

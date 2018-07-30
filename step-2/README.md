@@ -49,11 +49,11 @@ After 10 seconds, pprof will automatically open your default browser and point i
 
 ![pprof Graph View](pprof-graph.png)
 
-The default view is the **Graph** view, but I think that the **Flame Graph** view is easier to understand. You can switch view by using the `View` dropdown on the top left of the UI, and select `Flame Graph` - or go to <http://localhost:9000/ui/flamegraph> directly.
+The default view is the **Graph** view, but I think that the **Flame Graph** view is easier to understand. You can select a different view by using the `View` dropdown on the top left of the UI, and select `Flame Graph` - or go to <http://localhost:9000/ui/flamegraph> directly.
 
 ![pprof Flame Graph View](pprof-flame-graph.png)
 
-We can clearly see that most of the CPU time is spent in `doSomeBusinessLogic` function, and more specifically in the `eatCPU` function. Well, given the name of the function, I guess it's working pretty well ;-)
+We can clearly see that most of the CPU time is spent in the `doSomeBusinessLogic` function, and more specifically in the `eatCPU` function. Well, given the name of the function, I guess it's working pretty well ;-)
 
 We can see that it's doing some time-related operations. If we now select the `Source` view - or go to <http://localhost:9000/ui/source> - we can see the affected source code directly, and if we search for the `eatCPU` func:
 
@@ -71,13 +71,13 @@ We could also use a different tool to understand what is happening during those 
 $ curl http://localhost:6060/debug/pprof/trace\?seconds\=10 > /tmp/trace.out
 ```
 
-Then, make a new HTTP request
+And quickly enough, make a new HTTP request (within the 10 seconds window):
 
 ```
 $ curl http://localhost:6060/
 ```
 
-and use the go trace tool to start a new webserver on port 9000 to analyze the trace:
+and then, once the execution trace has been collected, use the go trace tool to start a new webserver on port 9000 to analyze the trace:
 
 ```
 $ go tool trace -http=:9000 /tmp/trace.out

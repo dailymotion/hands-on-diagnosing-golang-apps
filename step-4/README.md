@@ -41,7 +41,7 @@ After 10 seconds, pprof will automatically open your default browser and point i
 
 Once again, we can clearly see that most of the CPU time is spent in `doSomeBusinessLogic` function, and more specifically in the `allocateMemory` function. Let's try not to be influenced by the function name, and see behind it: lots of io-related operations, and a bytes buffer that is growing.
 
-So, it's memory-related. Again. Let's see if a memory heap profile can help us dig dipper. We'll take a heap profile with
+So, it's memory-related. Again. Let's see if a memory heap profile can help us dig deeper. We'll take a heap profile with
 
 ```
 $ pprof -http=:9001 http://localhost:6060/debug/pprof/heap
@@ -55,7 +55,17 @@ But it's empty. And no, it's not a bug. You can try all the different views, you
 
 That means that our memory issue is scoped to a single HTTP request, and that we have no "leak".
 
-Let's confirm this by opening the `Source` view of the CPU profile at <http://localhost:9000/ui/source>:
+Instead of displaying the "inuse space", let's try to display the "allocated space", using the `-sample_index=alloc_space` flag:
+
+```
+$ pprof -sample_index=alloc_space -http=:9001 http://localhost:6060/debug/pprof/heap
+```
+
+Great, this time we have something! Let's switch to the `Flame Graph` view, as usual:
+
+![pprof Heap Flame Graph View with allocated space](pprof-heap-alloc-space.png)
+
+So our function is back, and is clearly allocating memory, but it doesn't hold on any. So no "leak". Let's confirm this by opening the `Source` view of the CPU profile at <http://localhost:9000/ui/source>:
 
 ![pprof CPU Source View](pprof-cpu-source.png)
 

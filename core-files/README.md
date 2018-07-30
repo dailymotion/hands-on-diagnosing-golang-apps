@@ -20,7 +20,7 @@ There are a few different ways to generate a core dump:
 
 A note about core dumps storage:
 - on MacOS, by default, they are stored in the `/cores` directory
-- on Linux, by default, they are stored in a location defined in the `/proc/sys/kernel/core_pattern` file
+- on Linux, by default, they are stored in a location defined in the `/proc/sys/kernel/core_pattern` file - or in the current directory, name `core.PID`
 
 ## Inspecting core dumps
 
@@ -205,7 +205,7 @@ and you can print an expression
 "mv.refresh_bidder_list()"
 ```
 
-or it's type:
+or its type:
 
 ```
 (dlv) goroutine 27 frame 2 whatis queue.viewNameToRefresh
